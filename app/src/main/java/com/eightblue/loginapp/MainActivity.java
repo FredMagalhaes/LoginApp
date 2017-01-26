@@ -30,19 +30,24 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Date;
 
+import static com.google.android.gms.common.ConnectionResult.SERVICE_DISABLED;
+import static com.google.android.gms.common.ConnectionResult.SERVICE_MISSING;
+import static com.google.android.gms.common.ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED;
+
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
     private GoogleApiClient mGoogleApiClient;
 
+    private FirebaseUser user;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private static final String TAG = "MainActivity";
     private static final int LOG_IN = 123;
 
-    private FirebaseUser user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,9 +162,18 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-        // be available.
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
-        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+
+        switch (connectionResult.getErrorCode()) {
+            case SERVICE_MISSING:
+            case SERVICE_VERSION_UPDATE_REQUIRED:
+            case SERVICE_DISABLED:
+            default:
+                // An unresolvable error has occurred and Google APIs (including Sign-In) will not
+                // be available.
+                Log.d(TAG, "onConnectionFailed:" + connectionResult);
+                Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
     }
 }
