@@ -1,79 +1,35 @@
 {
   "project_info": {
-    "project_number": "460019562062",
-    "firebase_url": "https://white-97a8f.firebaseio.com",
-    "project_id": "white-97a8f",
-    "storage_bucket": "white-97a8f.appspot.com"
+    "project_number": "912809530676",
+    "firebase_url": "https://white-a6caf.firebaseio.com",
+    "project_id": "white-a6caf",
+    "storage_bucket": "white-a6caf.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:460019562062:android:93522451737bff83",
-        "android_client_info": {
-          "package_name": "com.eightblue.login.android"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "460019562062-o3c6qf7ihskes0rkq9h3476fnh703d2b.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.eightblue.login.android",
-            "certificate_hash": "27F80E5B1A4359B9F37EF87E2EE2B3E5FD3E19FD"
-          }
-        },
-        {
-          "client_id": "460019562062-r5jg9vb87quuorirq19ebmuiigoue0tp.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBYFi05tNPcSPRH3W0azApj6go7vTU8tec"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "460019562062-r5jg9vb87quuorirq19ebmuiigoue0tp.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:460019562062:android:90cff3eb3b58fe8e",
+        "mobilesdk_app_id": "1:912809530676:android:90cff3eb3b58fe8e",
         "android_client_info": {
           "package_name": "com.eightblue.loginapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "460019562062-fk7fr8jbh5c8hc58ck1hmig922eiu5gc.apps.googleusercontent.com",
+          "client_id": "912809530676-kk255sug964b4fma6pj6fr0h14e9aehq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.eightblue.loginapp",
-            "certificate_hash": "B849C069EFD09C1CED0AA7154C63D0061DBA464D"
+            "certificate_hash": "27F80E5B1A4359B9F37EF87E2EE2B3E5FD3E19FD"
           }
         },
         {
-          "client_id": "460019562062-r5jg9vb87quuorirq19ebmuiigoue0tp.apps.googleusercontent.com",
+          "client_id": "912809530676-smrd2qjo68tb29rpi3tln4vtuvlpqlrd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBYFi05tNPcSPRH3W0azApj6go7vTU8tec"
+          "current_key": "AIzaSyAAt8CJXZqKIPvFuC6Bk7QxuFULkmu4W_o"
         }
       ],
       "services": {
@@ -84,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "460019562062-r5jg9vb87quuorirq19ebmuiigoue0tp.apps.googleusercontent.com",
+              "client_id": "912809530676-smrd2qjo68tb29rpi3tln4vtuvlpqlrd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
