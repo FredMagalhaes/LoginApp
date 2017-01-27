@@ -26,18 +26,7 @@ import static com.google.android.gms.common.ConnectionResult.SERVICE_DISABLED;
 import static com.google.android.gms.common.ConnectionResult.SERVICE_MISSING;
 import static com.google.android.gms.common.ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED;
 
-public class MainActivity extends AppCompatActivity implements
-        GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
-
-    private GoogleApiClient mGoogleApiClient;
-
-    private FirebaseUser user;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-
-    private static final String TAG = "MainActivity";
-    private static final int LOG_IN = 123;
+public class MainActivity extends AppCompatActivity {
 
     private Fragment fragment;
     private FragmentManager fragmentManager;
@@ -74,127 +63,6 @@ public class MainActivity extends AppCompatActivity implements
                         return true;
                     }
                 });
-
-        // Button listeners
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-                } else {
-                    // User is signed out
-                    signIn();
-                }
-            }
-        };
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
-        if (requestCode == LOG_IN) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
-                Toast.makeText(MainActivity.this, "User logado", Toast.LENGTH_SHORT).show();
-            } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(MainActivity.this, "cancelado", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-
-        switch (i) {
-            case R.id.sign_out_button:
-                signOut();
-                break;
-            case R.id.disconnect_button:
-                revokeAccess();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void signIn() {
-        Intent signInIntent = new Intent(this, UserRegisterActivity.class);
-        startActivityForResult(signInIntent, LOG_IN);
-    }
-
-    private void signOut() {
-        // Firebase sign out
-        mAuth.signOut();
-
-        // Google sign out
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(@NonNull Status status) {
-                        findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-                    }
-                });
-    }
-
-    private void revokeAccess() {
-        // Firebase sign out
-        mAuth.signOut();
-
-        // Google revoke access
-        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(@NonNull Status status) {
-                        findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-                    }
-                });
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-        switch (connectionResult.getErrorCode()) {
-            case SERVICE_MISSING:
-            case SERVICE_VERSION_UPDATE_REQUIRED:
-            case SERVICE_DISABLED:
-            default:
-                // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-                // be available.
-                Log.d(TAG, "onConnectionFailed:" + connectionResult);
-                Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
-                break;
-        }
-
-    }
 }
